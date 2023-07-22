@@ -20,7 +20,7 @@ INSERT INTO Customers (name, username, email)
 VALUES 	('Tony Stark', 				'IWinEveryTime', 	'ironman@gmail.com'),
 		('Bill Gates', 				'GameGuru', 		'billgates@outlook.com'),
 		('Matthew McConaughey', 	'StarFighter', 		'mattc@yahoo.com'),
-		('Barack Obama', 			'Rogue Warrior', 	'number44@whitehouse.gov'),
+		('Barack Obama', 			'RogueWarrior', 	'number44@whitehouse.gov'),
 		('Michael Scott', 			'YouMadBro', 		'mikescott@aol.com');
 
 
@@ -76,14 +76,14 @@ VALUES 	('Shooter'),
 
 -- Create Games_Genres table
 CREATE OR REPLACE TABLE Games_Genres (
-	games_gameID INT NOT NULL,
-	genres_genreID INT NOT NULL,
-	FOREIGN KEY (games_gameID) REFERENCES Games(gameID) ON DELETE CASCADE,
-	FOREIGN KEY (genres_genreID) REFERENCES Genres(genreID) ON DELETE CASCADE
+	gameID INT NOT NULL,
+	genreID INT NOT NULL,
+	FOREIGN KEY (gameID) REFERENCES Games(gameID) ON DELETE CASCADE,
+	FOREIGN KEY (genreID) REFERENCES Genres(genreID) ON DELETE CASCADE
 );
 
 -- Insert values within the Games_Genres table
-INSERT INTO Games_Genres (games_gameID, genres_genreID)
+INSERT INTO Games_Genres (gameID, genreID)
 VALUES 	(1, 1),
 		(1, 2),
 		(2, 2),
