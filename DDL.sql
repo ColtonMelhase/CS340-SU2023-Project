@@ -45,18 +45,19 @@ CREATE OR REPLACE TABLE Games (
 	gameID INT NOT NULL AUTO_INCREMENT UNIQUE,
 	studioID INT NOT NULL,
 	title varchar(45) NOT NULL UNIQUE,
+	publishDate date NOT NULL,
 	price decimal(6,2) NOT NULL,
 	PRIMARY KEY (gameID),
 	FOREIGN KEY (studioID) REFERENCES Studios(studioID) ON DELETE CASCADE
 );
 
 -- Insert values within the Games table
-INSERT INTO Games (studioID, title, price)
-VALUES 	(1, 'Madspace', 			59.99),
-		(4, 'Galaxy and Command', 	29.99),
-		(2, 'Charge of Rivalry', 	39.99),
-		(1, 'Madspace 2', 			69.99),
-		(5, 'Forgotten Universe', 	15.99);
+INSERT INTO Games (studioID, title, publishDate, price)
+VALUES 	(1, 'Madspace', 			'2017-05-28', 	59.99),
+		(4, 'Galaxy and Command', 	'2018-09-30', 	29.99),
+		(2, 'Charge of Rivalry', 	'2020-01-01', 	39.99),
+		(1, 'Madspace 2',			'2019-04-17', 	69.99),
+		(5, 'Forgotten Universe', 	'2019-12-25', 	15.99);
 
 -- Create Genres table
 CREATE OR REPLACE TABLE Genres (
@@ -99,18 +100,20 @@ CREATE OR REPLACE TABLE Orders (
 	orderID INT NOT NULL AUTO_INCREMENT UNIQUE,
 	customerID INT,
 	gameID INT,
+	orderDate datetime NOT NULL,
+	pricePaid decimal(6,2) NOT NULL,
 	PRIMARY KEY (orderID),
 	FOREIGN KEY (customerID) REFERENCES Customers(customerID) ON DELETE SET NULL,
 	FOREIGN KEY (gameID) REFERENCES Games(gameID) ON DELETE SET NULL
 );
 
 -- Insert value within the Orders table
-INSERT INTO Orders (customerID, gameID)
-VALUES 	(1, 3),
-		(1, 4),
-		(3, 2),
-		(2, 5),
-		(5, 1);
+INSERT INTO Orders (customerID, gameID, orderDate, pricePaid)
+VALUES 	(1, 3, '2020-11-07 11:34:09', 39.99),
+		(1, 4, '2023-01-10 12:34:09', 69.99),
+		(3, 2, '2012-03-12 03:34:09', 19.99),
+		(2, 5, '2021-01-11 07:34:09', 13.99),
+		(5, 1, '2022-06-18 10:34:09', 59.99);
 
 -- Re-enable foreign key checks
 SET FOREIGN_KEY_CHECKS = 1;
