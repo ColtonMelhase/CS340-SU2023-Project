@@ -23,17 +23,21 @@ nav a:link, nav a:visited {
 table {
     margin-top: 20px;
     margin-bottom: 20px;
+    border-collapse: collapse;
     border: solid 1px black;
 }
 tr:nth-child(even) {
     background-color: bisque;
 }
 th {
+    background-color: rgb(233, 203, 112);
     border: solid 1px black;
+    width:150px;
 }
 td {
     border: solid 1px black;
     padding: 10px;
+    height: 30px;
 }
 
 footer {
