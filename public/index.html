@@ -22,7 +22,48 @@
         <a href="genres.html"><b>Genres</b></a> ]
     </nav>
     <div>
-
+        <h2>Home Page</h2>
+        <p>Vapor is an online video game store owned by Spigot 
+            that sells $15 million in video games annually. 
+            Vapor has 500,000 registered accounts, and 1500 game 
+            studios publish their products on the website. This
+            database will track customer profiles, along with their
+            game orders. It will also keep track of game studios
+            partnered with Vapor, and their respective published
+            games. Games will also be categorized with a list of genres,
+            so customers may be able to search by specific genres when
+            browsing the game store.
+        </p>
+        <table id="overview-table">
+            <tr>
+                <th>Table Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Customers</td>
+                <td>An entity that contains data about our customers.</td>
+            </tr>
+            <tr>
+                <td>Orders</td>
+                <td>An entity that contains data about our orders.</td>
+            </tr>
+            <tr>
+                <td>Studios</td>
+                <td>An entity that contains data about game studios partnering with Vapor</td>
+            </tr>
+            <tr>
+                <td>Games</td>
+                <td>An entity that contains data about games published on the platform.</td>
+            </tr>
+            <tr>
+                <td>Games_Genres</td>
+                <td>An intersection table that supports the M:N relationship between Games and Genres.</td>
+            </tr>
+            <tr>
+                <td>Genres</td>
+                <td>An entity that contains a list of game genres on our platform.</td>
+            </tr>
+        </table>
     </div>
     <footer>
         <p><em>&copy; Colton Melhase, Kevin Rossel</em></p>

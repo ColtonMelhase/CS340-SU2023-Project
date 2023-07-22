@@ -18,5 +18,29 @@ nav a:link, nav a:visited {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    
+}
+
+table {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: solid 1px black;
+}
+tr:nth-child(even) {
+    background-color: bisque;
+}
+th {
+    border: solid 1px black;
+}
+td {
+    border: solid 1px black;
+    padding: 10px;
+}
+
+footer {
+    padding-left: 10px;
+    height: 30px;
+    border-bottom: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
