@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(245, 238, 217);
+}
+
+header {
+    display: flex;
+}
+header h1 {
+    margin-left: 10px;
+}
+
+nav {
+    border-bottom: solid 1px black;
+    padding-bottom: 10px;
+}
+nav a:link, nav a:visited {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    
+}
