@@ -70,6 +70,70 @@
             </tr>
         </table>
     </div>
+    <div id="dbFunctions">
+        <div id="search">
+            <h3>Search Game</h3>
+            <form id="searchGame">
+                <table>
+                    <tr>
+                        <td><label for="title">title:</label></td>
+                        <td><input type="text" id="title" name="title"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="insert">
+            <h3>Add Game</h3>
+            <form id="addGame">
+                <table>
+                    <tr>
+                        <td><label for="studioID">studioID:</label></td>
+                        <td><input type="text" id="fname" name="fname"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="title">title:</label></td>
+                        <td><input type="text" id="title" name="title"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="publishDate">publishDate:</label></td>
+                        <td><input type="date" id="publishDate" name="publishDate"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="price">price:</label></td>
+                        <td><input type="number" id="price" name="price"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="genres">genres:</label></td>
+                        <td>
+                            <input type="checkbox" id="shooter" name="shooter">
+                            <label>Shooter</label><br>
+                            <input type="checkbox" id="space" name="space">
+                            <label>Space</label><br>
+                            <input type="checkbox" id="strategy" name="strategy">
+                            <label>Strategy</label><br>
+                            <input type="checkbox" id="rpg" name="rpg">
+                            <label>RPG</label><br>
+                            <input type="checkbox" id="online" name="online">
+                            <label>Online</label><br>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="update">
+            <h3>Delete Game</h3>
+            <form id="deleteGame">
+                <table>
+                    <tr>
+                        <td><label for="gameID">Select a Game:</label></td>
+                        <td><select name="gameID" id="updateGameSelect">
+                            <option value="game">Select a Game</option>
+                        </select></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
     <footer>
         <p><em>&copy; Colton Melhase, Kevin Rossel</em></p>
     </footer>

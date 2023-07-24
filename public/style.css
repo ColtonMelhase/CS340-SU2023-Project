@@ -20,25 +20,46 @@ nav a:link, nav a:visited {
     cursor: pointer;
 }
 
-table {
+table td {
+    padding-right: 20px;
+}
+#tupleList table, #overview-table {
     margin-top: 20px;
     margin-bottom: 20px;
     border-collapse: collapse;
     border: solid 1px black;
 }
-tr:nth-child(even) {
+#tupleList tr:nth-child(even), #overview-table tr:nth-child(even) {
     background-color: bisque;
 }
-th {
+#tupleList th, #overview-table th{
     background-color: rgb(233, 203, 112);
     border: solid 1px black;
     width:150px;
 }
-td {
+#tupleList td, #overview-table td {
     border: solid 1px black;
     padding: 10px;
     height: 30px;
 }
+
+#dbFunctions > *{
+    border: solid 1px black;
+    width: 400px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+input[type=text], input[type=date], input[type=datetime], input[type=number] {
+    width: 150px;
+    height: 20px;
+}
+select {
+    width: 158px;
+    height: 26px;
+    padding: 1px 2px;
+}
+
 
 footer {
     padding-left: 10px;
