@@ -40,7 +40,7 @@ SELECT * FROM Studios;
 
 -- INSERT/Create a new game studio
 INSERT INTO Studios (name) VALUES
-(;nameInput);
+(:nameInput);
 
 -- ===== Games =====
 
