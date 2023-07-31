@@ -14,6 +14,8 @@ UPDATE Customers
 SET name = :nameInput, username = :usernameInput, email = :emailInput
 WHERE customerID = :customerIDInput;
 
+-- DELETE a customer
+DELETE FROM Customers WHERE customerID=:customerIDInput;
 
 -- ===== Orders =====
 
@@ -50,9 +52,6 @@ SELECT * FROM Games;
 -- INSERT/Add a new game
 INSERT INTO Games (studioID, title, publishDate, price) VALUES
 (:studioIDInput, :titleInput, :publishDateInput, :priceInput);
-
--- DELETE a game
-DELETE FROM Games WHERE gameID=:gameIDInput;
 
 -- SEARCH for a game based on title
 SELECT * FROM Games
