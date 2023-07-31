@@ -53,9 +53,6 @@ SELECT * FROM Games;
 INSERT INTO Games (studioID, title, publishDate, price) VALUES
 (:studioIDInput, :titleInput, :publishDateInput, :priceInput);
 
--- DELETE a game
-DELETE FROM Games WHERE gameID=:gameIDInput;
-
 -- SEARCH for a game based on title
 SELECT * FROM Games
 WHERE CONTAINS(title, :titleInput);
