@@ -14,6 +14,8 @@ UPDATE Customers
 SET name = :nameInput, username = :usernameInput, email = :emailInput
 WHERE customerID = :customerIDInput;
 
+-- DELETE a customer
+DELETE FROM Customers WHERE customerID=:customerIDInput;
 
 -- ===== Orders =====
 
