@@ -1,0 +1,23 @@
+{
+  "name": "cs340-su2023-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ColtonMelhase/CS340-SU2023-Project.git"
+  },
+  "author": "Colton Melhase, Kevin Rossel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ColtonMelhase/CS340-SU2023-Project/issues"
+  },
+  "homepage": "https://github.com/ColtonMelhase/CS340-SU2023-Project#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3"
+  }
+}
