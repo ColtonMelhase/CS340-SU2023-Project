@@ -1,0 +1,23 @@
+<div id="tupleList">
+    <h2>Games_Genres</h2>
+
+    <table>
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.gameID}}</td>
+                <td>{{this.genreID}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>

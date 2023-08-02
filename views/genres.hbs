@@ -1,0 +1,24 @@
+<div id="tupleList">
+    <h2>Genres</h2>
+
+    <table>
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.genreID}}</td>
+                <td>{{this.name}}</td>
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
