@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(245, 238, 217);
+}
+
+header {
+    display: flex;
+}
+header h1 {
+    margin-left: 10px;
+}
+
+nav {
+    border-bottom: solid 1px black;
+    padding-bottom: 10px;
+}
+nav a:link, nav a:visited {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+table td {
+    padding-right: 20px;
+}
+#tupleList table, #overview-table {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border: solid 1px black;
+}
+#tupleList tr:nth-child(even), #overview-table tr:nth-child(even) {
+    background-color: bisque;
+}
+#tupleList th, #overview-table th{
+    background-color: rgb(233, 203, 112);
+    border: solid 1px black;
+    width:150px;
+}
+#tupleList td, #overview-table td {
+    border: solid 1px black;
+    padding: 10px;
+    height: 30px;
+}
+
+#dbFunctions > *{
+    border: solid 1px black;
+    width: 400px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+input[type=text], input[type=date], input[type=datetime], input[type=number] {
+    width: 150px;
+    height: 20px;
+}
+select {
+    width: 158px;
+    height: 26px;
+    padding: 1px 2px;
+}
+
+
+footer {
+    padding-left: 10px;
+    height: 30px;
+    border-bottom: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
