@@ -21,10 +21,66 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 /*
     ROUTES
 */
-app.get('/', function(req, res)                 // This is the basic syntax for what is called a 'route'
+app.get('/', function(req, res)
+    {  
+
+        res.render('index');                  // Render the index.hbs file, and also send the renderer
+                                                             // an object where 'data' is equal to the 'rows' we
+    });                                           // requesting the web site.
+
+app.get('/customers.hbs', function(req, res)
     {
-        res.send("The server is running!")      // This function literally sends the string "The server is running!" to the computer
-    });                                         // requesting the web site.
+        let query1 = "SELECT * FROM Customers;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('customers', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        }) 
+    });
+
+app.get('/orders.hbs', function(req, res)
+    {
+        let query1 = "SELECT * FROM Orders;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('orders', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        }) 
+    });
+
+app.get('/studios.hbs', function(req, res)
+    {
+        let query1 = "SELECT * FROM Studios;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('studios', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        }) 
+    });
+
+app.get('/games.hbs', function(req, res)
+    {
+        let query1 = "SELECT * FROM Games;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('games', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        }) 
+    });
+
+app.get('/games_genres.hbs', function(req, res)
+    {
+        let query1 = "SELECT * FROM Games_Genres;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('games_genres', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        }) 
+    });
+
+app.get('/genres.hbs', function(req, res)
+    {
+        let query1 = "SELECT * FROM Genres;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('genres', {data: rows});                  // Render the index.hbs file, and also send the renderer
+        }) 
+    });
 
 /*
     LISTENER
