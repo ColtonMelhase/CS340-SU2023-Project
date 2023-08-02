@@ -3,12 +3,12 @@
 /*
     SETUP
 */
-var express = require('express');   // We are using the express library for the web server
-var app     = express();           // We need to instantiate an express object to interact with the server in our code
+var express = require('express'); // We are using the express library for the web server
+var app = express();              // We need to instantiate an express object to interact with the server in our code
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT        = 22221;                 // Set a port number at the top so it's easy to change in the future
+PORT = 22221;                     // Set a port number at the top so it's easy to change in the future
 
 var db = require('./database/db-connector');
 
@@ -21,91 +21,90 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 /*
     ROUTES
 */
-app.get('/', function(req, res)
-    {  
+app.get('/', function(req, res) {
+    res.render('index');            // Render the index.hbs file, and also send the renderer
+                                    // an object where 'data' is equal to the 'rows' we
+});                                 // requesting the web site.
 
-        res.render('index');                  // Render the index.hbs file, and also send the renderer
-                                                             // an object where 'data' is equal to the 'rows' we
-    });                                           // requesting the web site.
+app.get('/customers.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Customers;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('customers', {data: rows});              // Render the index.hbs file, and also send the renderer
+    })
+});
 
-app.get('/customers.hbs', function(req, res)
-    {
-        let query1 = "SELECT * FROM Customers;";
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+app.get('/orders.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Orders;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('orders', {data: rows});                 // Render the index.hbs file, and also send the renderer
+    })
+});
 
-            res.render('customers', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        }) 
-    });
+app.get('/studios.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Studios;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('studios', {data: rows});                // Render the index.hbs file, and also send the renderer
+    })
+});
 
-app.get('/orders.hbs', function(req, res)
-    {
-        let query1 = "SELECT * FROM Orders;";
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+app.get('/games.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Games;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('games', {data: rows});                  // Render the index.hbs file, and also send the renderer
+    })
+});
 
-            res.render('orders', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        }) 
-    });
+app.get('/games_genres.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Games_Genres;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('games_genres', {data: rows});           // Render the index.hbs file, and also send the renderer
+    })
+});
 
-app.get('/studios.hbs', function(req, res)
-    {
-        let query1 = "SELECT * FROM Studios;";
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
-
-            res.render('studios', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        }) 
-    });
-
-app.get('/games.hbs', function(req, res)
-    {
-        let query1 = "SELECT * FROM Games;";
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
-
-            res.render('games', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        }) 
-    });
-
-app.get('/games_genres.hbs', function(req, res)
-    {
-        let query1 = "SELECT * FROM Games_Genres;";
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
-
-            res.render('games_genres', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        }) 
-    });
-
-app.get('/genres.hbs', function(req, res)
-    {
-        let query1 = "SELECT * FROM Genres;";
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
-
-            res.render('genres', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        }) 
-    });
+app.get('/genres.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Genres;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('genres', {data: rows});                 // Render the index.hbs file, and also send the renderer
+    })
+});
 
 
 // ADD CUSTOMER
 app.post('/addCustomer', function(req, res) {
     let data = req.body;
 
-    let name = parseInt(data['name']);
-    let username = parseInt(data['username']);
-    let email = parseInt(data['email']);
+    let query = `INSERT INTO Customers(name, username, email) VALUES ('${data['name']}', '${data['username']}', '${data['email']}');`;
 
-    let query1 = `INSERT INTO Customers(name, username, email) VALUES ('${data['name']}', '${data['username']}', '${data['email']}');`;
-
-    db.pool.query(query1, function(error, rows, fields) {
+    db.pool.query(query, function(error, rows, fields) {
         if(error) {
             console.log(error)
             res.sendStatus(400);
-        }
-        else {
+        } else {
             res.redirect('/customers.hbs');
         }
     })
 })
+
+// UPDATE CUSTOMER
+app.post('/updateCustomer', function(req, res) {
+    let data = req.body;
+    let query = `UPDATE Customers SET name='${data['name']}', username='${data['username']}', email='${data['email']}' WHERE customerID = ${data['customerID']};`
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/customers.hbs');
+        }
+    })
+})
+
+
 /*
     LISTENER
 */
-app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+// This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+app.listen(PORT, function() {    
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });

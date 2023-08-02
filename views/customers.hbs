@@ -49,12 +49,14 @@
         </div>
         <div id="update">
             <h3>Update Customer</h3>
-            <form id="updateCustomer">
+            <form id="updateCustomer" method="POST" action="/updateCustomer">
                 <table>
                     <tr>
                         <td><label for="customerID">Select a Customer:</label></td>
                         <td><select name="customerID" id="updateCustomerSelect">
-                            <option value="customer">Select a Customer</option>
+                            {{#each data}}
+                            <option value="{{this.customerID}}">{{this.name}}</option>
+                            {{/each}}
                         </select></td>
                     </tr>
                     <tr>
