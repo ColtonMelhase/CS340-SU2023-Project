@@ -82,6 +82,27 @@ app.get('/genres.hbs', function(req, res)
         }) 
     });
 
+
+// ADD CUSTOMER
+app.post('/addCustomer', function(req, res) {
+    let data = req.body;
+
+    let name = parseInt(data['name']);
+    let username = parseInt(data['username']);
+    let email = parseInt(data['email']);
+
+    let query1 = `INSERT INTO Customers(name, username, email) VALUES ('${data['name']}', '${data['username']}', '${data['email']}');`;
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            res.redirect('/customers.hbs');
+        }
+    })
+})
 /*
     LISTENER
 */
