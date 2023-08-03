@@ -50,7 +50,7 @@ table td {
     padding-bottom: 10px;
     margin: 10px;
 }
-input[type=text], input[type=date], input[type=datetime], input[type=number] {
+input[type=text], input[type=date], input[type=datetime], input[type=number], input[type=email] {
     width: 150px;
     height: 20px;
 }
