@@ -79,12 +79,14 @@
         </div>
         <div id="delete">
             <h3>Delete Customer</h3>
-            <form id="deleteCustomer">
+            <form id="deleteCustomer" method="POST" action="/deleteCustomer">
                 <table>
                     <tr>
                         <td><label for="customerID">Select a Customer:</label></td>
-                        <td><select name="customerID" id="updateCustomerSelect">
-                            <option value="customer">Select a Customer</option>
+                        <td><select name="customerID" id="deleteCustomerSelect">
+                            {{#each data}}
+                            <option value="{{this.customerID}}">{{this.name}}</option>
+                            {{/each}}
                         </select></td>
                     </tr>
                     <tr>

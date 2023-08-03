@@ -100,6 +100,21 @@ app.post('/updateCustomer', function(req, res) {
     })
 })
 
+// DELETE CUSTOMER
+app.post('/deleteCustomer', function(req, res) {
+    let data = req.body;
+    let query = `DELETE FROM Customers WHERE customerID = ${data['customerID']};`
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/customers.hbs');
+        }
+    })
+})
+
 
 /*
     LISTENER
