@@ -16,8 +16,16 @@
             {{#each data}}
             <tr>
                 <td>{{this.orderID}}</td>
-                <td>{{this.customer}}</td>
-                <td>{{this.game}}</td>
+                {{#if this.customer}}
+                    <td>{{this.customer}}</td>
+                {{else}}
+                    <td><em>NULL</em></td>
+                {{/if}}
+                {{#if this.game}}
+                    <td>{{this.game}}</td>
+                {{else}}
+                    <td><em>NULL</em></td>
+                {{/if}}
                 <td>{{this.orderDate}}</td>
                 <td>{{this.pricePaid}}</td>
             </tr>
