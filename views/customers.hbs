@@ -9,7 +9,6 @@
                     {{@key}}
                 </th>
                 {{/each}}
-                <th id="deleteCol">Delete</td>
             </tr>
         </thead>
 
@@ -20,12 +19,10 @@
                 <td>{{this.name}}</td>
                 <td>{{this.username}}</td>
                 <td>{{this.email}}</td>
-                <td><button id="deleteBtn" onclick="deleteCustomer({{this.customerID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
-    <script src="./js/delete_customer.js"></script>
 </div>
 <div id="dbFunctions">
         <div id="insert">
@@ -65,15 +62,15 @@
                     </tr>
                     <tr>
                         <td><label for="name">Name:</label></td>
-                        <td><input type="text" id="name" name="name"></td>
+                        <td><input type="text" id="name" name="name" required>*required</td>
                     </tr>
                     <tr>
                         <td><label for="username">Username:</label></td>
-                        <td><input type="text" id="username" name="username"></td>
+                        <td><input type="text" id="username" name="username" required>*required</td>
                     </tr>
                     <tr>
                         <td><label for="email">Email:</label></td>
-                        <td><input type="email" id="email" name="email"></td>
+                        <td><input type="email" id="email" name="email" required>*required</td>
                     </tr>
                     <tr>
                         <td><input id="submitBtn" type="submit"></td>
