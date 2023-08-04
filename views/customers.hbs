@@ -54,7 +54,7 @@
                 <table>
                     <tr>
                         <td><label for="customerID">Select a Customer:</label></td>
-                        <td><select name="customerID" id="updateCustomerSelect">
+                        <td><select name="customerID" id="updateCustomerSelect" onchange="updateForm()">
                             {{#each data}}
                             <option value="{{this.customerID}}">{{this.name}}</option>
                             {{/each}}
@@ -62,15 +62,15 @@
                     </tr>
                     <tr>
                         <td><label for="name">Name:</label></td>
-                        <td><input type="text" id="name" name="name" required>*required</td>
+                        <td><input type="text" id="upName" name="name" required>*required</td>
                     </tr>
                     <tr>
                         <td><label for="username">Username:</label></td>
-                        <td><input type="text" id="username" name="username" required>*required</td>
+                        <td><input type="text" id="upUsername" name="username" required>*required</td>
                     </tr>
                     <tr>
                         <td><label for="email">Email:</label></td>
-                        <td><input type="email" id="email" name="email" required>*required</td>
+                        <td><input type="email" id="upEmail" name="email" required>*required</td>
                     </tr>
                     <tr>
                         <td><input id="submitBtn" type="submit"></td>
@@ -97,3 +97,4 @@
             </form>
         </div>
     </div>
+<script src="./js/customers.js"></script>

@@ -68,7 +68,18 @@ app.get('/genres.hbs', function(req, res) {
     })
 });
 
-
+// GET Customer by ID
+app.get('/:id', function(req, res) {
+    let query = `Select * FROM Customers WHERE customerID=${req.params.id};`
+    db.pool.query(query, function(error, result, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.json(result[0]);
+        }
+    })
+})
 // ADD CUSTOMER
 app.post('/addCustomer', function(req, res) {
     let data = req.body;
