@@ -34,7 +34,7 @@ app.get('/customers.hbs', function(req, res) {
 });
 
 app.get('/orders.hbs', function(req, res) {
-    let query1 = "SELECT Orders.orderID, Customers.name AS customer, Games.title AS game, Orders.orderDate, Orders.pricePaid FROM Orders INNER JOIN Customers ON Orders.customerID=Customers.customerID INNER JOIN Games ON Orders.gameID=Games.gameID;";
+    let query1 = "SELECT Orders.orderID, Customers.name AS customer, Games.title AS game, Orders.orderDate, Orders.pricePaid FROM Orders LEFT JOIN Customers ON Orders.customerID=Customers.customerID LEFT JOIN Games ON Orders.gameID=Games.gameID;";
     db.pool.query(query1, function(error, rows, fields) {   // Execute the query
         res.render('orders', {data: rows});                 // Render the index.hbs file, and also send the renderer
     })
