@@ -37,6 +37,10 @@ table td {
     border: solid 1px black;
     width:150px;
 }
+#tupleList #deleteCol {
+    width:75px;
+    
+}
 #tupleList td, #overview-table td {
     border: solid 1px black;
     padding: 10px;

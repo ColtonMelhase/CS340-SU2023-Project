@@ -9,6 +9,7 @@
                     {{@key}}
                 </th>
                 {{/each}}
+                <th id="deleteCol">Delete</td>
             </tr>
         </thead>
 
@@ -19,10 +20,12 @@
                 <td>{{this.name}}</td>
                 <td>{{this.username}}</td>
                 <td>{{this.email}}</td>
+                <td><button id="deleteBtn" onclick="deleteCustomer({{this.customerID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+    <script src="./js/delete_customer.js"></script>
 </div>
 <div id="dbFunctions">
         <div id="insert">
