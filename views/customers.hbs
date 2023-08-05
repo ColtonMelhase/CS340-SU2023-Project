@@ -54,7 +54,8 @@
                 <table>
                     <tr>
                         <td><label for="customerID">Select a Customer:</label></td>
-                        <td><select name="customerID" id="updateCustomerSelect" onchange="updateForm()">
+                        <td><select name="customerID" id="updateCustomerSelect" onchange="updateForm()" required>
+                             <option value="">Select</option>
                             {{#each data}}
                             <option value="{{this.customerID}}">{{this.name}}</option>
                             {{/each}}
