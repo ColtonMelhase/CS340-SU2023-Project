@@ -187,6 +187,41 @@ app.post('/deleteOrder', function(req, res) {
         }
     })
 })
+
+// *****************************************************************************************
+// ORDER FUNCTIONS
+// *****************************************************************************************
+
+// ADD STUDIO
+app.post('/addStudio', function(req, res) {
+    let data = req.body;
+
+    let query = `INSERT INTO Studios(name) VALUES ('${data['name']}');`;
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/studios.hbs');
+        }
+    })
+})
+
+// DELETE STUDIO
+app.post('/deleteStudio', function(req, res) {
+    let data = req.body;
+    let query = `DELETE FROM Studios WHERE studioID = ${data['studioID']};`
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/studios.hbs');
+        }
+    })
+})
 /*
     LISTENER
 */
