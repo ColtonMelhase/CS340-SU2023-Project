@@ -68,9 +68,18 @@ app.get('/genres.hbs', function(req, res) {
     })
 });
 
-// GET Customer by ID
-app.get('/:id', function(req, res) {
-    let query = `Select * FROM Customers WHERE customerID=${req.params.id};`
+// *****************************************************************************************
+// UNIVERSAL ROUTE FUNCTIONS
+// *****************************************************************************************
+
+//GET ID FROM TABLE
+app.get('/:table/:id', function(req, res) {
+    let table = req.params.table;
+    let attr = req.params.table.toLowerCase().substring(0, req.params.table.length - 1);
+    let id = req.params.id
+    console.log(req.params);
+    let query = `Select * FROM ${table} WHERE ${attr}ID=${req.params.id};`
+
     db.pool.query(query, function(error, result, fields) {
         if(error) {
             console.log(error)
