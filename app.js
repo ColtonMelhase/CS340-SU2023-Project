@@ -35,8 +35,21 @@ app.get('/customers.hbs', function(req, res) {
 
 app.get('/orders.hbs', function(req, res) {
     let query1 = "SELECT Orders.orderID, Customers.name AS customer, Games.title AS game, Orders.orderDate, Orders.pricePaid FROM Orders LEFT JOIN Customers ON Orders.customerID=Customers.customerID LEFT JOIN Games ON Orders.gameID=Games.gameID;";
+    let query2 = "SELECT * FROM Customers;";
+    let query3 = "SELECT * FROM Games;";
     db.pool.query(query1, function(error, rows, fields) {   // Execute the query
-        res.render('orders', {data: rows});                 // Render the index.hbs file, and also send the renderer
+        var data = rows;
+        // console.log(rows);
+        db.pool.query(query2, (error, rows, fields) => {
+            var customers = rows;
+            // console.log(rows);
+            db.pool.query(query3, (error, rows, fields) => {
+                var games = rows;
+
+                res.render('orders', {data: data, customers: customers, games: games}); 
+            })
+               
+        })// Render the index.hbs file, and also send the renderer
     })
 });
 
@@ -143,6 +156,37 @@ app.post('/deleteCustomer', function(req, res) {
 // ORDER FUNCTIONS
 // *****************************************************************************************
 
+// ADD ORDER
+app.post('/addOrder', function(req, res) {
+    let data = req.body;
+
+    let query = `INSERT INTO Orders(customerID, gameID, orderDate, pricePaid) VALUES ('${data['customerID']}', '${data['gameID']}', '${data['orderDate']}', ${data['pricePaid']});`;
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/orders.hbs');
+        }
+    })
+})
+
+
+// DELETE ORDER
+app.post('/deleteOrder', function(req, res) {
+    let data = req.body;
+    let query = `DELETE FROM Orders WHERE orderID = ${data['orderID']};`
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/orders.hbs');
+        }
+    })
+})
 /*
     LISTENER
 */

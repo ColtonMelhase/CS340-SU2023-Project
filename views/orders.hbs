@@ -32,3 +32,56 @@
             {{/each}}
         </tbody>
     </table>
+</div>
+<div id="dbFunctions">
+    <div id="insert">
+        <h3>Add Order</h3>
+        <form id="addOrder" method="POST" action="/addOrder">
+            <table>
+                <tr>
+                    <td><label for="customerID">Select a Customer:</label></td>
+                    <td><select name="customerID" id="addCustomerSelect" required>
+                        <option value="">Select</option>
+                        {{#each customers}}
+                        <option value="{{this.customerID}}">{{this.name}}</option>
+                        {{/each}}
+                    </select>*required</td>
+                </tr>
+                <tr>
+                    <td><label for="gameID">Select a Game:</label></td>
+                    <td><select name="gameID" id="addGameSelect" required>
+                        <option value="">Select</option>
+                        {{#each games}}
+                        <option value="{{this.gameID}}">{{this.title}}</option>
+                        {{/each}}
+                    </select>*required</td>
+                </tr>
+                <tr>
+                    <td><label for="orderDate">Order Date:</label></td>
+                    <td><input type="date" id="orderDate" name="orderDate" required>*required</td>
+                </tr>
+                <tr>
+                    <td><label for="pricePaid">Price Paid:</label></td>
+                    <td><input type="number" step="0.01" id="pricePaid" name="pricePaid" required>*required</td>
+                </tr>
+                <tr>
+                    <td><input id="submitBtn" type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="delete">
+        <h3>Delete Order</h3>
+        <form id="deleteOrder" method="POST" action="/deleteOrder">
+            <table>
+                <tr>
+                    <td><label for="orderID">Input an orderID:</label></td>
+                    <td><input type="number" id="delOrderInput" name="orderID" min="1">
+                </tr>
+                <tr>
+                    <td><input id="submitBtn" type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
