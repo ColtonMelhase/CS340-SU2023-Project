@@ -90,7 +90,7 @@ app.get('/:table/:id', function(req, res) {
     let table = req.params.table;
     let attr = req.params.table.toLowerCase().substring(0, req.params.table.length - 1);
     let id = req.params.id
-    console.log(req.params);
+    console.log(`QUERY: SELECT * FROM ${table} WHERE ${attr}ID=${req.params.id}`);
     let query = `Select * FROM ${table} WHERE ${attr}ID=${req.params.id};`
 
     db.pool.query(query, function(error, result, fields) {
