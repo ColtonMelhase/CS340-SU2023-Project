@@ -17,7 +17,57 @@
             <tr>
                 <td>{{this.game}}</td>
                 <td>{{this.genre}}</td>
+                <td>{{this.gameID}}</td>
+                <td>{{this.genreID}}</td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+</div>
+<div id="dbFunctions">
+    <div id="insert">
+        <h3>Add Game Genre Relation</h3>
+        <form id="addGame" method="POST" action="/addGameGenre">
+            <table>
+                <tr>
+                    <td><label for="gameID">Select a Game:</label></td>
+                    <td><select name="gameID" id="gameSelect">
+                        {{#each data2}}
+                        <option value="{{this.gameID}}">{{this.title}}</option>
+                        {{/each}}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><label for="genreID">Select a Genre:</label></td>
+                    <td><select name="genreID" id="genreSelect">
+                        {{#each data3}}
+                        <option value="{{this.genreID}}">{{this.name}}</option>
+                        {{/each}}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><input id="submitBtn" type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="delete">
+        <h3>Delete Game Genre Relation</h3>
+        <form id="deleteGame" method="POST" action="/deleteGameGenre">
+            <table>
+                <tr>
+                    <td><label for="gameGenrePair">Select a Game:</label></td>
+                    <td><select name="gameGenrePair" id="gameSelect">
+                        {{#each data}}
+                        <option value="{{this.gameID}},{{this.genreID}}">{{this.game}} is {{this.genre}}</option>
+                        {{/each}}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><input id="submitBtn" type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

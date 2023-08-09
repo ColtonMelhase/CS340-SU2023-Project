@@ -71,9 +71,15 @@ app.get('/games.hbs', function(req, res) {
 });
 
 app.get('/games_genres.hbs', function(req, res) {
-    let query1 = "SELECT Games.title AS game, Genres.name AS genre FROM Games_Genres INNER JOIN Games ON Games_Genres.gameID=Games.gameID INNER JOIN Genres ON Games_Genres.genreID=Genres.genreID ORDER BY Games.title ASC;";
-    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
-        res.render('games_genres', {data: rows});           // Render the index.hbs file, and also send the renderer
+    let query1 = "SELECT Games.title AS game, Genres.name AS genre, Games.gameID, Genres.genreID FROM Games_Genres INNER JOIN Games ON Games_Genres.gameID=Games.gameID INNER JOIN Genres ON Games_Genres.genreID=Genres.genreID ORDER BY Games.title ASC;";
+    let query2 = "SELECT Games.gameID, Games.title FROM Games;";
+    let query3 = "SELECT Genres.genreID, Genres.name FROM Genres;"
+    db.pool.query(query1, function(error, rows, fields) {                             // Execute the query
+        db.pool.query(query2, function(error2, rows2, fields2) {
+            db.pool.query(query3, function(error3, rows3, fields3) {
+                res.render('games_genres', {data: rows, data2: rows2, data3: rows3}); // Render the index.hbs file, and also send the renderer
+            })
+        })
     })
 });
 
@@ -298,6 +304,44 @@ app.post('/deleteGenre', function(req, res) {
     })
 })
 
+// *****************************************************************************************
+// GAMES_GENRES FUNCTIONS
+// *****************************************************************************************
+
+// INSERT GAMES_GENRE
+app.post('/addGameGenre', function(req, res) {
+    let data = req.body;
+
+    let query = `INSERT INTO Games_Genres(gameID, genreID) VALUES ('${data['gameID']}', '${data['genreID']}');`;
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/games_genres.hbs');
+        }
+    })
+})
+
+// DELETE GENRE
+app.post('/deleteGameGenre', function(req, res) {
+    let data = req.body;
+
+    let gameID = data['gameGenrePair'].split(",")[0];
+    let genreID = data['gameGenrePair'].split(",")[1];
+    
+    let query = `DELETE FROM Games_Genres WHERE Games_Genres.genreID = ${genreID} AND Games_Genres.gameID = ${gameID};`;
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/games_genres.hbs');
+        }
+    })
+})
 
 /*
     LISTENER
