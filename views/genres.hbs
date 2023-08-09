@@ -22,3 +22,39 @@
             {{/each}}
         </tbody>
     </table>
+</div>
+<div id="dbFunctions">
+    <div id="insert">
+        <h3>Add Genre</h3>
+        <form id="addGenre" method="POST" action="/addGenre">
+            <table>
+                <tr>
+                    <td><label for="name">Name:</label></td>
+                    <td><input type="text" id="name" name="name" required>*required</td>
+                </tr>
+                <tr>
+                    <td><input id="submitBtn" type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="delete">
+        <h3>Delete Genre</h3>
+        <form id="deleteGenre" method="POST" action="/deleteGenre">
+            <table>
+                <tr>
+                    <td><label for="genreID">Select a Genre:</label></td>
+                    <td><select name="genreID" id="deleteGenreSelect">
+                        {{#each data}}
+                        <option value="{{this.genreID}}">{{this.name}}</option>
+                        {{/each}}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><input id="submitBtn" type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

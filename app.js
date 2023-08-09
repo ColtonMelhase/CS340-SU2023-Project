@@ -262,6 +262,43 @@ app.post('/deleteGame', function(req, res) {
     })
 })
 
+// *****************************************************************************************
+// GENRE FUNCTIONS
+// *****************************************************************************************
+
+// INSERT GENRE
+app.post('/addGenre', function(req, res) {
+    let data = req.body;
+
+    let query = `INSERT INTO Genres(name) VALUES ('${data['name']}');`;
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/genres.hbs');
+        }
+    })
+})
+
+// DELETE GENRE
+app.post('/deleteGenre', function(req, res) {
+    let data = req.body;
+
+    let query = `DELETE FROM Genres WHERE Genres.genreID = ${data['genreID']};`;
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/genres.hbs');
+        }
+    })
+})
+
+
 /*
     LISTENER
 */
