@@ -24,3 +24,55 @@
             {{/each}}
         </tbody>
     </table>
+</div>
+<div id="dbFunctions">
+    <div id="insert">
+            <h3>Add Game</h3>
+            <form id="addGame" method="POST" action="/addGame">
+                <table>
+                    <tr>
+                        <td><label for="studioID">Select a Studio:</label></td>
+                        <td><select name="studioID" id="deleteStudioSelect">
+                            {{#each data2}}
+                            <option value="{{this.studioID}}">{{this.name}}</option>
+                            {{/each}}
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td><label for="title">Title:</label></td>
+                        <td><input type="text" id="title" name="title" required>*required</td>
+                    </tr>
+                    <tr>
+                        <td><label for="publishDate">Publish Date:</label></td>
+                        <td><input type="text" id="publishDate" name="publishDate" required>*required</td>
+                    </tr>
+                    <tr>
+                        <td><label for="price">Price:</label></td>
+                        <td><input type="price" id="price" name="price" required>*required</td>
+                    </tr>
+                    <tr>
+                        <td><input id="submitBtn" type="submit"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    <div id="delete">
+        <h3>Delete Game</h3>
+        <form id="deleteGame" method="POST" action="/deleteGame">
+            <table>
+                <tr>
+                    <td><label for="gameID">Select a Game:</label></td>
+                    <td><select name="gameID" id="deleteGameSelect">
+                        {{#each data}}
+                        <option value="{{this.gameID}}">{{this.title}}</option>
+                        {{/each}}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><input id="submitBtn" type="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

@@ -62,8 +62,11 @@ app.get('/studios.hbs', function(req, res) {
 
 app.get('/games.hbs', function(req, res) {
     let query1 = "SELECT Games.gameID, Studios.name AS studio, Games.title, Games.publishDate, Games.price FROM Games INNER JOIN Studios ON Games.studioID=Studios.studioID;";
-    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
-        res.render('games', {data: rows});                  // Render the index.hbs file, and also send the renderer
+    let query2 = "SELECT name, studioID FROM Studios;";
+    db.pool.query(query1, function(error1, rows1, fields1) {     // Execute query1
+        db.pool.query(query2, function(error2, rows2, fields2) { // Execute query2
+            res.render('games', {data: rows1, data2: rows2});    // Render the index.hbs file, and also send the renderer
+        })
     })
 });
 
@@ -222,6 +225,43 @@ app.post('/deleteStudio', function(req, res) {
         }
     })
 })
+
+// *****************************************************************************************
+// GAME FUNCTIONS
+// *****************************************************************************************
+
+// INSERT GAME
+app.post('/addGame', function(req, res) {
+    let data = req.body;
+
+    let query = `INSERT INTO Games(studioID, title, publishDate, price) VALUES ('${data['studioID']}', '${data['title']}', '${data['publishDate']}', '${data['price']}');`;
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/games.hbs');
+        }
+    })
+})
+
+// DELETE GAME
+app.post('/deleteGame', function(req, res) {
+    let data = req.body;
+
+    let query = `DELETE FROM Games WHERE Games.gameID = ${data['gameID']};`;
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/games.hbs');
+        }
+    })
+})
+
 /*
     LISTENER
 */
