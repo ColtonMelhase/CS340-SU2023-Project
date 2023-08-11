@@ -20,6 +20,9 @@ nav a:link, nav a:visited {
     cursor: pointer;
 }
 
+#intro {
+    width:900px;
+}
 table td {
     padding-right: 20px;
 }
