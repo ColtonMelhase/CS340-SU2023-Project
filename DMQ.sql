@@ -111,6 +111,12 @@ FROM Studios;
 INSERT INTO Games(studioID, title, publishDate, price) 
 VALUES ('${data['studioID']}', '${data['title']}', '${data['publishDate']}', '${data['price']}');
 
+-- This query is used within the UPDATE GAME form. It stores the json form data in the
+-- variable 'data' and injects the data in the query.
+UPDATE Games 
+SET studioID='${data['studioID']}', title='${data['title']}', publishDate='${data['publishDate']}', price='${data['price']}' 
+WHERE gameID = ${data['gameID']};
+
 -- This query is used within the DELETE GAME form. It stores the json data in the
 -- variable 'data' and injects the data in the query.
 DELETE FROM Games 
