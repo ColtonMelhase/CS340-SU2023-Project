@@ -240,6 +240,21 @@ app.post('/addGame', function(req, res) {
     })
 })
 
+// UPDATE GAME
+app.post('/updateGame', function(req, res) {
+    let data = req.body;
+    let query = `UPDATE Games SET studioID='${data['studioID']}', title='${data['title']}', publishDate='${data['publishDate']}', price='${data['price']}' WHERE gameID = ${data['gameID']};`
+
+    db.pool.query(query, function(error, rows, fields) {
+        if(error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/games.hbs');
+        }
+    })
+})
+
 // DELETE GAME
 app.post('/deleteGame', function(req, res) {
     let data = req.body;
