@@ -21,74 +21,12 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 /*
     ROUTES
 */
+
+// GET HOMEPAGE
 app.get('/', function(req, res) {
     res.render('index');            // Render the index.hbs file, and also send the renderer
                                     // an object where 'data' is equal to the 'rows' we
 });                                 // requesting the web site.
-
-app.get('/customers.hbs', function(req, res) {
-    let query1 = "SELECT * FROM Customers;";
-    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
-        res.render('customers', {data: rows});              // Render the index.hbs file, and also send the renderer
-    })
-});
-
-app.get('/orders.hbs', function(req, res) {
-    let query1 = "SELECT Orders.orderID, Customers.name AS customer, Games.title AS game, Orders.orderDate, Orders.pricePaid FROM Orders LEFT JOIN Customers ON Orders.customerID=Customers.customerID LEFT JOIN Games ON Orders.gameID=Games.gameID;";
-    let query2 = "SELECT * FROM Customers;";
-    let query3 = "SELECT * FROM Games;";
-    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
-        var data = rows;
-        // console.log(rows);
-        db.pool.query(query2, (error, rows, fields) => {
-            var customers = rows;
-            // console.log(rows);
-            db.pool.query(query3, (error, rows, fields) => {
-                var games = rows;
-
-                res.render('orders', {data: data, customers: customers, games: games}); 
-            })
-               
-        })// Render the index.hbs file, and also send the renderer
-    })
-});
-
-app.get('/studios.hbs', function(req, res) {
-    let query1 = "SELECT * FROM Studios;";
-    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
-        res.render('studios', {data: rows});                // Render the index.hbs file, and also send the renderer
-    })
-});
-
-app.get('/games.hbs', function(req, res) {
-    let query1 = "SELECT Games.gameID, Studios.name AS studio, Games.title, Games.publishDate, Games.price FROM Games INNER JOIN Studios ON Games.studioID=Studios.studioID;";
-    let query2 = "SELECT name, studioID FROM Studios;";
-    db.pool.query(query1, function(error1, rows1, fields1) {     // Execute query1
-        db.pool.query(query2, function(error2, rows2, fields2) { // Execute query2
-            res.render('games', {data: rows1, data2: rows2});    // Render the index.hbs file, and also send the renderer
-        })
-    })
-});
-
-app.get('/games_genres.hbs', function(req, res) {
-    let query1 = "SELECT Games.title AS game, Genres.name AS genre, Games.gameID, Genres.genreID FROM Games_Genres INNER JOIN Games ON Games_Genres.gameID=Games.gameID INNER JOIN Genres ON Games_Genres.genreID=Genres.genreID ORDER BY Games.title ASC;";
-    let query2 = "SELECT Games.gameID, Games.title FROM Games;";
-    let query3 = "SELECT Genres.genreID, Genres.name FROM Genres;"
-    db.pool.query(query1, function(error, rows, fields) {                             // Execute the query
-        db.pool.query(query2, function(error2, rows2, fields2) {
-            db.pool.query(query3, function(error3, rows3, fields3) {
-                res.render('games_genres', {data: rows, data2: rows2, data3: rows3}); // Render the index.hbs file, and also send the renderer
-            })
-        })
-    })
-});
-
-app.get('/genres.hbs', function(req, res) {
-    let query1 = "SELECT * FROM Genres;";
-    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
-        res.render('genres', {data: rows});                 // Render the index.hbs file, and also send the renderer
-    })
-});
 
 // *****************************************************************************************
 // UNIVERSAL ROUTE FUNCTIONS
@@ -111,9 +49,19 @@ app.get('/:table/:id', function(req, res) {
         }
     })
 })
+
+// GET HOMEPAGE
 // *****************************************************************************************
 // CUSTOMER FUNCTIONS
 // *****************************************************************************************
+
+// GET ALL CUSTOMERS
+app.get('/customers.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Customers;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('customers', {data: rows});              // Render the index.hbs file, and also send the renderer
+    })
+});
 
 // ADD CUSTOMER
 app.post('/addCustomer', function(req, res) {
@@ -165,6 +113,27 @@ app.post('/deleteCustomer', function(req, res) {
 // ORDER FUNCTIONS
 // *****************************************************************************************
 
+// GET ALL ORDERS
+app.get('/orders.hbs', function(req, res) {
+    let query1 = "SELECT Orders.orderID, Customers.name AS customer, Games.title AS game, Orders.orderDate, Orders.pricePaid FROM Orders LEFT JOIN Customers ON Orders.customerID=Customers.customerID LEFT JOIN Games ON Orders.gameID=Games.gameID;";
+    let query2 = "SELECT * FROM Customers;";
+    let query3 = "SELECT * FROM Games;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        var data = rows;
+        // console.log(rows);
+        db.pool.query(query2, (error, rows, fields) => {
+            var customers = rows;
+            // console.log(rows);
+            db.pool.query(query3, (error, rows, fields) => {
+                var games = rows;
+
+                res.render('orders', {data: data, customers: customers, games: games}); 
+            })
+               
+        })// Render the index.hbs file, and also send the renderer
+    })
+});
+
 // ADD ORDER
 app.post('/addOrder', function(req, res) {
     let data = req.body;
@@ -201,6 +170,14 @@ app.post('/deleteOrder', function(req, res) {
 // STUDIO FUNCTIONS
 // *****************************************************************************************
 
+// GET ALL STUDIOS
+app.get('/studios.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Studios;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('studios', {data: rows});                // Render the index.hbs file, and also send the renderer
+    })
+});
+
 // ADD STUDIO
 app.post('/addStudio', function(req, res) {
     let data = req.body;
@@ -235,6 +212,17 @@ app.post('/deleteStudio', function(req, res) {
 // *****************************************************************************************
 // GAME FUNCTIONS
 // *****************************************************************************************
+
+// GET ALL GAMES
+app.get('/games.hbs', function(req, res) {
+    let query1 = "SELECT Games.gameID, Studios.name AS studio, Games.title, Games.publishDate, Games.price FROM Games INNER JOIN Studios ON Games.studioID=Studios.studioID;";
+    let query2 = "SELECT name, studioID FROM Studios;";
+    db.pool.query(query1, function(error1, rows1, fields1) {     // Execute query1
+        db.pool.query(query2, function(error2, rows2, fields2) { // Execute query2
+            res.render('games', {data: rows1, data2: rows2});    // Render the index.hbs file, and also send the renderer
+        })
+    })
+});
 
 // INSERT GAME
 app.post('/addGame', function(req, res) {
@@ -272,6 +260,14 @@ app.post('/deleteGame', function(req, res) {
 // GENRE FUNCTIONS
 // *****************************************************************************************
 
+// GET ALL GENRES
+app.get('/genres.hbs', function(req, res) {
+    let query1 = "SELECT * FROM Genres;";
+    db.pool.query(query1, function(error, rows, fields) {   // Execute the query
+        res.render('genres', {data: rows});                 // Render the index.hbs file, and also send the renderer
+    })
+});
+
 // INSERT GENRE
 app.post('/addGenre', function(req, res) {
     let data = req.body;
@@ -308,6 +304,20 @@ app.post('/deleteGenre', function(req, res) {
 // GAMES_GENRES FUNCTIONS
 // *****************************************************************************************
 
+// GET ALL GAMES_GENRES
+app.get('/games_genres.hbs', function(req, res) {
+    let query1 = "SELECT Games.title AS game, Genres.name AS genre, Games.gameID, Genres.genreID FROM Games_Genres INNER JOIN Games ON Games_Genres.gameID=Games.gameID INNER JOIN Genres ON Games_Genres.genreID=Genres.genreID ORDER BY Games.title ASC;";
+    let query2 = "SELECT Games.gameID, Games.title FROM Games;";
+    let query3 = "SELECT Genres.genreID, Genres.name FROM Genres;"
+    db.pool.query(query1, function(error, rows, fields) {                             // Execute the query
+        db.pool.query(query2, function(error2, rows2, fields2) {
+            db.pool.query(query3, function(error3, rows3, fields3) {
+                res.render('games_genres', {data: rows, data2: rows2, data3: rows3}); // Render the index.hbs file, and also send the renderer
+            })
+        })
+    })
+});
+
 // INSERT GAMES_GENRE
 app.post('/addGameGenre', function(req, res) {
     let data = req.body;
@@ -324,7 +334,7 @@ app.post('/addGameGenre', function(req, res) {
     })
 })
 
-// DELETE GENRE
+// DELETE GAMES_GENRE
 app.post('/deleteGameGenre', function(req, res) {
     let data = req.body;
 
