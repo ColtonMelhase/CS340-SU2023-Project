@@ -67,16 +67,16 @@
                         {{#each data}}
                         <option value="{{this.gameID}}">{{this.title}}</option>
                         {{/each}}
-                    </select></td>
+                    </select>*required</td>
                 </tr>
                 <tr>
                     <td><label for="studioID">Select a Studio:</label></td>
-                    <td><select name="studioID" id="upStudioSelect">
+                    <td><select name="studioID" id="upStudioSelect" required>
                         <option value="">Select</option>
                         {{#each data2}}
                             <option value="{{this.studioID}}">{{this.name}}</option>
                         {{/each}}
-                    </select></td>
+                    </select>*required</td>
                 </tr>
                 <tr>
                     <td><label for="title">Title:</label></td>
